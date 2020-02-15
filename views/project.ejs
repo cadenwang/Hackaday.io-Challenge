@@ -14,10 +14,10 @@
             <div class="row">
                 <div class="col project-item">
                     <div class="headline">
-                        <h1>SMD Component Magazines</h1>
-                        <p class="description">3D Print yourself some of these magazines to keep your shop organized and boost your pick and place productivity!</p>
+                        <h1><%= project.name %></h1>
+                        <p class="description"><%= project.description %></p>
                         <div class="author">
-                            <span class="identity-card" data-id="106066"><a href="#"><img src="https://cdn.hackaday.io/images/resize/24x24/9069691475567854340.jpg" alt="Robin Reiter">Robin Reiter</a></span>
+                            <span class="identity-card" data-id="106066"><a href="#"><img src=<%= project.url %> >Owner: <%= project.owner_id %></a></span>
                         </div>
                     </div>
                 </div>
@@ -25,40 +25,37 @@
             <div class="row justify-content-center">
                 <div class="col section-profile-stats">
                     <div class="stat-one view-count">
-                        <span title="View Count">5.4k</span>
+                        <span title="View Count"><%= project.views %></span>
                         <small>views</small>
                     </div>
                     <div class="stat-one comment_count">
-                        <span title="Comments">21</span>
+                        <span title="Comments"><%= project.comments %></span>
                         <small>comments</small>
                     </div>
                     <div class="stat-one follower_count">
-                        <span title="Followers">136</span>
+                        <span title="Followers"><%= project.followers %></span>
                         <small>followers</small>
                     </div>
                     <div class="stat-one like_count">
-                        <span title="Likes">133</span>
+                        <span title="Likes"><%= project.likes %></span>
                         <small>likes</small>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-between">
                 <div class="col col-md-4">
-                    <img class="img-fluid" src="https://cdn.hackaday.io/images/resize/600x600/6618131572933506546.png">
+                    <img class="img-fluid" src=<%= project.image_url %>>
                 </div>
                 <div class="col col-md-7">
                     <section class="section section-description">
                         <h2 id="menu-description" class="section-title">Description</h2>
-                        <p class="description">These are little magazines.
-                          <br>You label them, fill em up and store em in your shelf.
-                          <br>When your starting a small production run simply grab the components you need and click em onto the rail.
-                          <br>
-                          <br>I even color coded them. Capacitors are blue, resistors are black and ICs, Diodes etc. are in gray. But thats optional!
-                          <br>
-                          <br>Finding components and picking and placing them is a breeze and you're rushing through your PCBs in no time.
+                        <p class="description"><%= project.description %>
                         </p>
                     </section>
                     <a href="/" class="btn btn-primary">Go Back</a>
+                    
+                    <!-- <a href="/projects/" class="btn btn-primary">Previous</a> 
+                    <a href="/" class="btn btn-primary">Next</a> -->
                 </div>
             </div>
         </div>
