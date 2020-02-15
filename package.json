@@ -1,0 +1,29 @@
+{
+    "name": "onsite-challenge",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "gulp dev",
+        "start": "NODE_ENV=prod node app.js",
+        "build": "gulp build-sass",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Supplyframe Frontend <fe@supplyframe.com>",
+    "license": "MIT",
+    "dependencies": {
+        "async": "^3.1.0",
+        "bootstrap": "^4.3.1",
+        "dotenv": "^8.2.0",
+        "ejs": "^2.7.1",
+        "express": "^4.17.1",
+        "lodash": "^4.17.15",
+        "request": "^2.88.0"
+    },
+    "devDependencies": {
+        "gulp": "^4.0.2",
+        "gulp-nodemon": "^2.4.2",
+        "gulp-sass": "^4.0.2"
+    }
+}

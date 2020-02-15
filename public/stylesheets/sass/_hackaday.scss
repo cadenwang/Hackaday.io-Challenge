@@ -1,0 +1,148 @@
+.headline {
+    display: block;
+    padding: 0;
+    padding-top: 2.5em;
+    text-align: center;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+
+    h1 {
+        font-size: 39.6px;
+        font-size: 3.96rem;
+        line-height: 42px;
+        text-align: center;
+        margin: 0;
+        margin-bottom: 1.5rem;
+        word-break: break-word;
+        letter-spacing: -1px;
+        font-weight: 700;
+
+        @media (min-width: 62.4375em) {
+            font-size: 46.8px;
+            font-size: 4.68rem;
+            line-height: 49px;
+        }
+    }
+
+    &:after {
+        display: block;
+        width: 70px;
+        margin: 50px auto;
+        border-bottom: 2px solid #272727;
+        content: '';
+    }
+
+
+    @media (min-width: 75.4375em) {
+        margin: 50px auto;
+    }
+
+}
+
+h2.section-title{
+    word-break: break-all;
+    letter-spacing: normal;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    color: $gray-600;
+    font-size: $font-size-sm;
+}
+
+.project-holder .project-item{
+    .item-link {
+        position: relative;
+        display: block;
+        width: 100%;
+    }
+    .project-item-cover {
+        position: relative;
+        width: 340px;
+        height: 340px;
+        img{
+            display: block;
+            width: 100%;
+        }
+    }
+    .project-item-stats{
+        position: absolute;
+        right: 0;
+        bottom: 10px;
+        padding: .3em .8em;
+        background-color: #171717;
+        border-radius: 2px 0 0 2px;
+        color: #4D4D4D;
+        > span {
+            margin-right: .5em;
+            &:hover {
+                color: $primary;
+            }
+        }
+        .icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            font-size: 24px;
+            font-size: 2.4rem;
+            vertical-align: bottom;
+            svg {
+                fill: currentColor;
+                width: 24px;
+                height: 24px;
+                vertical-align: top;
+            }
+        }
+    }
+    .project-item-headline{
+        padding: 10px 0 10px 0;
+        margin: 0;
+        color: $primary;
+    }
+    .identity-card {
+        a { color: $gray-600; }
+        img {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+            margin-top: -2px;
+            border-radius: 50%;
+            background-color: #000;
+            vertical-align: middle;
+        }
+    }
+}
+
+.project-view {
+    .headline {
+        margin-bottom: $grid-gutter-width;
+        &:after {
+            margin: 50px auto $grid-gutter-width auto;
+        }
+    }
+    .section-profile-stats {
+        margin-bottom: $grid-gutter-width;
+        .stat-one {
+            color: $white;
+            font-size: 16px;
+            font-size: 1.6rem;
+            display: inline-block;
+            font-weight: bold;
+            margin-right: 35px;
+            span, small {
+                display: block;
+            }
+            small {
+                font-size: 10px;
+                font-size: 1rem;
+                font-weight: 300;
+                margin-top: -3px;
+            }
+        }
+    }
+}
+
+.btn-primary {
+    color: $black;
+    font-weight: 400;
+    text-shadow: 0px 1px 0px $primary;
+}
