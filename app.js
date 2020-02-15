@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -10,7 +11,11 @@ const ajaxRoute = require('./routes/ajax');
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static(path.join(__dirname, '/public')));
+
+console.log(process.env.HACKADAY_API_KEY)
 
 // home page
 app.get('/', indexRoute.get);
