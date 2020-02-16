@@ -53,9 +53,7 @@
                                 <h3 class="element-title">
                                     <a href="/projects/<%= project.id %>" title="SMD Component Magazines"><%= project.name %></a>
                                 </h3>
-                                <!-- <% if (usersMap.has(project.owner_id)) { %> -->
-                                    <p><span class="identity-card" data-id="106066"><a href="#"><img src="https://cdn.hackaday.io/images/resize/24x24/9069691475567854340.jpg" alt="<%= usersMap.get(project.owner_id) %>"><%= usersMap.get(project.owner_id) %></a></span></p>
-                                <!-- <% } %> -->
+                                <p><span class="identity-card" data-id="106066"><a href="#"><img src="<%= usersData.get(project.owner_id).image_url %>" ><%= usersData.get(project.owner_id).screen_name %></a></span></p>
                             </div>
                         </div>
                     <% }); %>
