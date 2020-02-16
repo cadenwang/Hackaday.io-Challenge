@@ -105,12 +105,47 @@ h2.section-title{
         display:none;
         position:absolute;
         top: 50%;
-        border:1px solid #333;
-        background-color:#161616;
-        border-radius:5px;
-        padding:10px;
-        color:#fff;
-        font-size:12px Arial;
+        background-color: $gray-900;
+        width: 80%;
+        padding: 1em 3em;
+        margin: auto;
+        .user-pic {
+            position: absolute;
+            top: -20%;
+            left: -7%;
+            img {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                border: 2px solid $gray-800;
+                background-color: #000;
+            }
+        }
+        .username {
+            color: $primary;
+            margin: auto;
+            padding-left: 1em;
+            
+        }
+        .about-me {
+            margin: auto;
+            padding-left: 1em;
+            font-size: $font-size-sm;
+        }
+        .followers-projects-container {
+            font-size: $font-size-sm;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1em;
+            div {
+                text-align: center;
+                width: 50%;
+                &:first-child {
+                    border-right: 1px solid $gray-600;
+                }
+            }
+        }
+
     }
     .identity-card {
         a { color: $gray-600; }

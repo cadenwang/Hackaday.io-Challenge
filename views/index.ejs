@@ -61,7 +61,13 @@
                                 </div>
                             </a>
                             <div class="tooltips">
-                                <div class="username element-title">
+                                <div class="user-pic">
+                                    <img src="<%= usersData.get(project.owner_id).image_url %>" >
+                                </div>
+                                <div>
+                                    <div class="username">
+                                        <%= usersData.get(project.owner_id).screen_name %>
+                                    </div>
                                     <p class="about-me">
                                         <%= usersData.get(project.owner_id).about_me %>
                                     </p>
