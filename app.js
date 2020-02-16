@@ -15,8 +15,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static(path.join(__dirname, '/public')));
 
-console.log(process.env.HACKADAY_API_KEY)
-
 // home page
 app.get('/', indexRoute.get);
 
