@@ -50,6 +50,8 @@ h2.section-title{
 }
 
 .project-holder .project-item{
+    position: relative;
+    display: block;
     .item-link {
         position: relative;
         display: block;
@@ -99,6 +101,17 @@ h2.section-title{
         margin: 0;
         color: $primary;
     }
+    .tooltips {
+        display:none;
+        position:absolute;
+        top: 50%;
+        border:1px solid #333;
+        background-color:#161616;
+        border-radius:5px;
+        padding:10px;
+        color:#fff;
+        font-size:12px Arial;
+    }
     .identity-card {
         a { color: $gray-600; }
         img {
@@ -147,3 +160,4 @@ h2.section-title{
     font-weight: 400;
     text-shadow: 0px 1px 0px $primary;
 }
+

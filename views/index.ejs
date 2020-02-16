@@ -3,11 +3,22 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Enter Title Here</title>
+        <title>Hackaday</title>
         <meta name="description" content="">
         <script type="text/javascript" src="//use.typekit.net/ymb0lgk.js"></script>
         <script type="text/javascript">try{Typekit.load({ async: true });}catch(e){}</script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" href="stylesheets/styles.css">
+        <script type="text/javascript">
+            $(document).ready(function() {
+            // Tooltip only Text
+                $('.identity-card').hover(function(){
+                    $(this).parent().parent().parent().find('.tooltips').show();
+                },function () {
+                    $(this).parent().parent().parent().find('.tooltips').hide();
+                });
+            });
+        </script>
     </head>
     <body class="home-view">
         <div class="container">
@@ -49,11 +60,30 @@
                                     </span>
                                 </div>
                             </a>
+                            <div class="tooltips">
+                                <div class="username element-title">
+                                    <p class="about-me">
+                                        <%= usersData.get(project.owner_id).about_me %>
+                                    </p>
+                                    <div class="followers-projects-container">
+                                        <div>
+                                            <b><%= usersData.get(project.owner_id).followers %></b> Followers
+                                        </div>
+                                        <div>
+                                            <b><%= usersData.get(project.owner_id).projects %></b> Projects
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="project-item-headline">
                                 <h3 class="element-title">
                                     <a href="/projects/<%= project.id %>" title="SMD Component Magazines"><%= project.name %></a>
                                 </h3>
-                                <p><span class="identity-card" data-id="106066"><a href="#"><img src="<%= usersData.get(project.owner_id).image_url %>" ><%= usersData.get(project.owner_id).screen_name %></a></span></p>
+                                <p>
+                                    <span class="identity-card" data-id="106066">
+                                        <a href="#"><img src="<%= usersData.get(project.owner_id).image_url %>" ><%= usersData.get(project.owner_id).screen_name %></a>
+                                    </span>
+                                </p>
                             </div>
                         </div>
                     <% }); %>
@@ -63,5 +93,6 @@
         </div>
         <!-- Add your site or application content here -->
         <script src="javascripts/index.js"></script>
+        
     </body>
 </html>
