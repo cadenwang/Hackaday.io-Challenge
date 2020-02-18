@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const indexRoute = require('./routes/index');
-const projectsRoute = require('./routes/projects');
+const projectRoute = require('./routes/project');
 const ajaxRoute = require('./routes/ajax');
 
 app.set('view engine', 'ejs');
@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.get('/', indexRoute.get);
 
 // project details page
-app.get('/projects/:id', projectsRoute.get);
+app.get('/project/:id', projectRoute.get);
 
 // ajax routes
 app.get('/ajax/projects/:page', ajaxRoute.projects);

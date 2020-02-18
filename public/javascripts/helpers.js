@@ -1,8 +1,9 @@
 const axios = require('axios');
 const apiKey = require('../../config.js').hackaday.apiKey;
 
-const getProjectsData = () => {
-  const projects = `http://api.hackaday.io/v1/projects?api_key=${apiKey}&sortby=newest`;
+const getProjectsData = (page = 1) => {
+  console.log('HELPER', page);
+  const projects = `http://api.hackaday.io/v1/projects?api_key=${apiKey}&page=${page}&sortby=newest`;
 
   return axios.get(projects).then(projectsData => {
       return projectsData.data;
