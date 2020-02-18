@@ -8,17 +8,7 @@
         <script type="text/javascript" src="//use.typekit.net/ymb0lgk.js"></script>
         <script type="text/javascript">try{Typekit.load({ async: true });}catch(e){}</script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="stylesheets/styles.css">
-        <script type="text/javascript">
-            $(document).ready(function() {
-            // Tooltip only Text
-                $('.identity-card').hover(function(){
-                    $(this).parent().parent().parent().find('.tooltips').show();
-                },function () {
-                    $(this).parent().parent().parent().find('.tooltips').hide();
-                });
-            });
-        </script>
+        <link rel="stylesheet" href="stylesheets/styles.css">  
     </head>
     <body class="home-view">
         <div class="container">
@@ -33,6 +23,7 @@
                 <div class="col">
                     <div class="project-holder row" id="projects">
                     <% projects.projects.forEach((project, index) => { %>
+                        <% let user = usersData.get(project.owner_id); %>
                         <div class="project-item col">
                             <a href="/projects/<%= project.id %>" class="item-link">
                                 <div title="SMD Component Magazines by Robin Reiter" class="project-item-cover">
@@ -62,21 +53,21 @@
                             </a>
                             <div class="tooltips">
                                 <div class="user-pic">
-                                    <img src="<%= usersData.get(project.owner_id).image_url %>" >
+                                    <img src="<%= user.image_url %>" >
                                 </div>
                                 <div>
                                     <div class="username">
-                                        <%= usersData.get(project.owner_id).screen_name %>
+                                        <%= user.screen_name %>
                                     </div>
                                     <p class="about-me">
-                                        <%= usersData.get(project.owner_id).about_me %>
+                                        <%= user.about_me %>
                                     </p>
                                     <div class="followers-projects-container">
                                         <div>
-                                            <b><%= usersData.get(project.owner_id).followers %></b> Followers
+                                            <b><%= user.followers %></b> Followers
                                         </div>
                                         <div>
-                                            <b><%= usersData.get(project.owner_id).projects %></b> Projects
+                                            <b><%= user.projects %></b> Projects
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +78,7 @@
                                 </h3>
                                 <p>
                                     <span class="identity-card" data-id="106066">
-                                        <a href="#"><img src="<%= usersData.get(project.owner_id).image_url %>" ><%= usersData.get(project.owner_id).screen_name %></a>
+                                        <a href="#"><img src="<%= user.image_url %>" ><%= user.screen_name %></a>
                                     </span>
                                 </p>
                             </div>
@@ -99,6 +90,5 @@
         </div>
         <!-- Add your site or application content here -->
         <script src="javascripts/index.js"></script>
-        
     </body>
 </html>
