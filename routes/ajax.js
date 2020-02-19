@@ -8,14 +8,15 @@ const {getProjectsData, getUsersByProjectId} = require('../public/javascripts/he
 ajaxRoute.projects = async function (req, res, next) {
     const page = req.params.page;
     const projectsData = await getProjectsData(page);
-    const usersData = await getUsersByProjectId(projectsData);
-    // return res.send(`ajax.projects page: ${page}`);
-    console.log('AJAX PAGE:', page);
-    return res.render('index', {projects: projectsData.projects,
-                                currentPage: projectsData.page,
-                                totalPages: projectsData.last_page,
-                                usersData: usersData
-    });
+    // const usersData = await getUsersByProjectId(projectsData);
+
+    res.json({
+        page: page,
+        projects: projectsData.projects,
+        currentPage: projectsData.page,
+        totalPages: projectsData.last_page,
+        // usersData: usersData
+    })
 }
 
 ajaxRoute.user = function (req, res, next) {

@@ -1,6 +1,7 @@
 
 //adds user tooltip hover functionality 
 $(document).ready(function() {
+
     $('.identity-card').hover(function(){
         $(this).parent().parent().parent().find('.tooltips').show();
     },function () {
@@ -9,6 +10,7 @@ $(document).ready(function() {
 
     
 });
+
 
 // (function setSessionStorage() {
 //     let projects = JSON.parse(sessionStorage.getItem('projects'));

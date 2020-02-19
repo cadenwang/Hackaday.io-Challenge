@@ -200,7 +200,8 @@ h2.section-title{
     display: flex;
     justify-content: space-around;
     text-align: center;
-    a.grey-gold-button {
+    button.grey-gold-button {
+        color: $primary;
         width: 49%;
         padding: .9em 1.5em .8em;
         background-image: linear-gradient(-180deg, #272727 0%, #1a1a1a 100%);

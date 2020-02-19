@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // home page
 app.get('/', indexRoute.get);
-
+app.get('/projects/:page', indexRoute.get);
 // project details page
 app.get('/project/:id', projectRoute.get);
 
