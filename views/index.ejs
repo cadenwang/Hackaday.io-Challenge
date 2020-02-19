@@ -90,8 +90,7 @@
                         <% } %>
                     <% }); %>
                     </div>
-                    <div class="pagination">
-                        <% console.log('PAGINATION', currentPage, totalPages); %>
+                    <div class="pagination" id="Pagination">
                         <% if (currentPage == 1 && totalPages > 1) { %> 
                             <button class="grey-gold-button next-button">Next ></button>
                         <% } else if (currentPage < totalPages) { %>
@@ -108,26 +107,24 @@
         <script src="javascripts/index.js"></script>
         <script>
             let page = +"<%= currentPage %>";
-            window.history.pushState({html: document.getElementById('projects').innerHTML, page: 1}, 'Title', '');
-
+            window.history.pushState({projectsHtml: document.getElementById('projects').innerHTML, 
+                                    paginationHtml: document.getElementById('Pagination').innerHTML, 
+                                    page: page}, 'Title', '');
             window.onpopstate = function(e){
-                console.log(e.state.page);
                 if(e.state){
                     if (page > e.state.page) {
                         page--;
-                        console.log('back button, page:', page);
                     } else if (page < e.state.page) {
                         page++;
-                        console.log('forward button, page:', page);
                     }
-                    document.getElementById('projects').innerHTML = e.state.html;
+                    document.getElementById('projects').innerHTML = e.state.projectsHtml;
+                    document.getElementById('Pagination').innerHTML = e.state.paginationHtml;
                 }
             };
 
-            $('.next-button').on('click', function() {
+            $('#Pagination').on('click', '.grey-gold-button', {}, function() {
                 const target = $(this).text();
                 (target === 'Next >') ? page++ : page--;
-                console.log('next button, page:', page);
                 $.ajax({
                     type: 'GET',
                     url: `/ajax/projects/${page}`,
@@ -137,13 +134,13 @@
                         const totalPages = data.totalPages;
                         // const usersData = data.usersData;
                         projects.forEach((project, index) => {
+                            let imageUrl = project.image_url;
+                            if (!imageUrl) {
+                                imageUrl = '/images/placeholder.png';
+                            }
                             $(`.project-${index}`).attr('href', `/project/${project.id}`).html(`
                                 <div class="project-item-cover">
-                                    <% if (` + project.image_url + `) { %> 
-                                        <img src="${project.image_url}">
-                                    <% } else { %>
-                                        <img src="/images/placeholder.png">
-                                    <% } %>
+                                    <img src="${imageUrl}">
                                 </div>
                                 <div class="project-item-stats">
                                     <span class="action-view-count" title="View Count">
@@ -167,7 +164,21 @@
                                 </div>
                             `)
                         });
-                        window.history.pushState({html: document.getElementById('projects').innerHTML, page: data.page}, 'Title', `/projects/${data.page}`);
+                        let paginationHtml = '';
+                        if (currentPage == 1 && totalPages > 1) {
+                            paginationHtml = '<button class="grey-gold-button next-button">Next ></button>';
+                        } else if (currentPage < totalPages) {
+                            paginationHtml = `<button class="grey-gold-button prev-button">< Prev</button>
+                                              <button class="grey-gold-button next-button">Next ></button>`
+                        } else if (currentPage == totalPages && totalPages > 1) {
+                            paginationHtml = `<button class="grey-gold-button prev-button">< Prev</button>`
+                        }
+                        $('#Pagination').html(paginationHtml);
+
+                        window.history.pushState({projectsHtml: document.getElementById('projects').innerHTML, paginationHtml: document.getElementById('Pagination').innerHTML, page: data.page}, 'Title', `/projects/${data.page}`);
+                        
+                        
+
                     }
                     
                 })
