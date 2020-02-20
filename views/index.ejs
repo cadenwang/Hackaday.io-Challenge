@@ -109,18 +109,9 @@
         <script>
             const page = +"<%= currentPage %>";  
             window.history.pushState({
-                html: document.getElementById('Content').innerHTML
+                html: document.getElementById('Content').innerHTML,
+                page: page
             }, 'Title', '');
-            window.onpopstate = function(e){
-                if (e.state && page > e.state.page) {
-                    page--;
-                } else if (e.state && page < e.state.page) {
-                    page++;
-                }
-                document.getElementById('Content').innerHTML = e.state.html;
-
-                showTooltipsOnHover();
-            };
             showTooltipsOnHover();
             handlePagination(page);
         </script>

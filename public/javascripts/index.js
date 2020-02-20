@@ -9,13 +9,12 @@ const showTooltipsOnHover = () => {
 
 //Handles pagination, including prev/next buttons and the browser back/forward
 const handlePagination = (page) => {
-
     pushState();
     window.onpopstate = function(e){
         if (e.state && page > e.state.page) {
-            page--;
+            page = e.state.page--;
         } else if (e.state && page < e.state.page) {
-            page++;
+            page = e.state.page++;
         }
         document.getElementById('Projects').innerHTML = e.state.projectsHtml;
         document.getElementById('Pagination').innerHTML = e.state.paginationHtml;
@@ -32,14 +31,14 @@ const handlePagination = (page) => {
     })
 }
 
-const pushState = (path = '') => {
+const pushState = (path = '', page) => {
     window.history.pushState({
         projectsHtml: document.getElementById('Projects').innerHTML, 
         paginationHtml: document.getElementById('Pagination').innerHTML,
         headlineHtml: document.getElementById('Headline').innerHTML, 
-        tooltipsHtml: document.getElementById('Tooltips').innerHTML, 
+        tooltipsHtml: document.getElementById('Tooltips').innerHTML,
         page: page
-    }, 'Title', path );
+    }, 'Title', path);
 }
 
 const ajaxProjectsPageRequest = (page) => {
@@ -56,9 +55,8 @@ const ajaxProjectsPageRequest = (page) => {
                 renderTooltips(user, index);
                 renderPaginationButtons(currentPage, totalPages);
             })
-
             showTooltipsOnHover();
-            pushState(`/projects/${data.page}`);
+            pushState(`/projects/${data.page}`, page);
         }
     })
 }
