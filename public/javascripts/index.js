@@ -9,21 +9,11 @@ const showTooltipsOnHover = () => {
 
 //Handles pagination, including prev/next buttons and the browser back/forward
 const handlePagination = (page) => {
+
     window.history.pushState({
-        html: document.getElementById('Content').innerHTML,
-        page: page
-    }, 'Title', '');
-    window.onpopstate = function(e){
-        if (e.state && page > e.state.page) {
-            page--;
-        } else if (e.state && page < e.state.page) {
-            page++;
-        }
-        document.getElementById('Content').innerHTML = e.state.html;
-
-        showTooltipsOnHover();
-    };
-
+        html: document.getElementById('Content').innerHTML
+    }, 'Title', `${window.location.pathname}`);
+    
     $('#Pagination').on('click', '.grey-gold-button', {}, function() {
         const target = $(this).text();
         (target === 'Next >') ? page++ : page--;
@@ -42,9 +32,18 @@ const handlePagination = (page) => {
                         renderPaginationButtons(currentPage, totalPages);
                     }
                 })
+                window.onpopstate = function(e){
+                    if (e.state && data.page > e.state.page) {
+                        data.page--;
+                    } else if (e.state && data.page < e.state.page) {
+                        data.page++;
+                    }
+                    document.getElementById('Content').innerHTML = e.state.html;
+            
+                    showTooltipsOnHover();
+                };
                 window.history.pushState({
-                    html: document.getElementById('Content').innerHTML,
-                    page: data.page
+                    html: document.getElementById('Content').innerHTML
                 }, 'Title', `/projects/${data.page}`);
             }
         }).done(function() {
