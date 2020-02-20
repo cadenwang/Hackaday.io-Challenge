@@ -45,7 +45,7 @@
             </div>
             <div class="row justify-content-between">
                 <div class="col col-md-4">
-                    <img class="img-fluid" src=<%= project.image_url %>>
+                    <img class="img-fluid" src="<%= project.image_url %>">
                 </div>
                 <div class="col col-md-7">
                     <section class="section section-description">
@@ -54,6 +54,30 @@
                         </p>
                     </section>
                     <button class="btn btn-primary grey-gold-button prev-button go-back">Go Back</button>
+                </div>
+            </div>
+            <div class="row justify-content-center related-users-container">
+                <h3>Similar Users</h3>
+                <div class="related-users">
+                    <% relatedUsers.forEach(user => { %>
+                        <div class="user-container">
+                            <div class="user-pic">
+                                <img class="img-fluid" src="<%= user.image_url %>" >
+                            </div>
+                            <div class="user-info-container">
+                                <div class="user-name">
+                                    <%= user.screen_name %>
+                                </div>
+                                <div class="user-location">
+                                    <% if (user.location) { %>
+                                        Location: <%= user.location %>
+                                    <% } else { %>
+                                        Location: Unknown
+                                    <% } %>         
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
                 </div>
             </div>
         </div>

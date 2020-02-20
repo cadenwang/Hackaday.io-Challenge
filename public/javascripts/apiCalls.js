@@ -32,7 +32,7 @@ const getUsersByProjectId = (projects) => {
 
         return usersMap;
     }).catch(err => {
-        console.log('Failed to get user data by project id', err);
+        console.log('Failed to get users by project ids', err);
     })
 }
 
@@ -41,7 +41,7 @@ const getUserByUserId = (userId) => {
     return axios.get(user).then(data => {
         return data.data;
     }).catch(err => {
-        console.log('failed to get data PROJECT.JS', err)
+        console.log('failed to get user by user id', err)
     })
 }
 
@@ -50,7 +50,39 @@ const getProjectById = (projectId) => {
     return axios.get(project).then(data => {
         return data.data;
     }).catch(err => {
-        console.log('failed to get data PROJECT.JS', err)
+        console.log('failed to get project by id', err)
+    })
+}
+
+//Searches for similar users and returns any user with AT LEAST 2 matching tags
+const searchRelatedUsers = (tags) => {
+    let tagSet = new Set();
+    tags.forEach(tag => {
+        tagSet.add(tag);
+    })
+    const users = `http://api.hackaday.io/v1/users/search?tag=${tags[0]}&api_key=${apiKey}`;
+    return axios.get(users).then(usersData => {
+        let similarUsersList = [];
+        for (let num = 0; num < usersData.data.users.length; num++) {
+            let user = usersData.data.users[num];
+            let matchingTags = 1;
+            for (let i = 0; i < user.tags.length; i++) {
+                const tag = user.tags[i];
+                if (tag !== tags[0] && tagSet.has(tag)) {
+                    matchingTags++;
+                    if (matchingTags > 1) {
+                        similarUsersList.push(user);
+                        break;
+                    }
+                }
+            }
+            if (matchingTags > 1) {
+                continue;
+            }
+        }
+        return similarUsersList;
+    }).catch(err => {
+        console.log('failed to get users by tag', err)
     })
 }
 
@@ -77,5 +109,6 @@ module.exports = {
     getUsersByProjectId,
     getProjectById,
     getUserByUserId,
+    searchRelatedUsers,
     getAllUsersData
 }

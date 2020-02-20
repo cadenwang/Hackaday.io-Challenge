@@ -20,6 +20,7 @@ ajaxRoute.projects = async function (req, res, next) {
 
 ajaxRoute.user = function (req, res, next) {
     const userId = req.params.id;
+    
     return res.send(`ajax.user id: ${userId}`);
 }
 
