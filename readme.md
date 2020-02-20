@@ -58,12 +58,12 @@ First off - we do not expect you to finish everything in this list! Focus on wha
         - Visiting the permanent URL should load the same page of projects as if the visitor navigated using the next/previous links.
 
 ![](pagination.gif)   
-     
+
 - Project Detail Page
     - When a project is clicked, server-side render a page that shows the clicked project's metadata (using [GET /projects/:id](https://dev.hackaday.io/doc/api/get-projects))
     - Show "recommended projects" and/or "recommended users" by comparing the selected project's tags with tags of other projects/users.
 
-![](projects-page.gif)
+![](project-page.gif)
 
 - Overall
     - Look for mobile friendly improvements.
