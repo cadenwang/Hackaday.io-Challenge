@@ -23,7 +23,6 @@ app.get('/project/:id', projectRoute.get);
 
 // ajax routes
 app.get('/ajax/projects/:page', ajaxRoute.projects);
-app.get('/ajax/user/:id', ajaxRoute.user);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

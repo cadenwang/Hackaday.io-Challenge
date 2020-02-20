@@ -9,13 +9,8 @@ const showTooltipsOnHover = () => {
 
 //Handles pagination, including prev/next buttons and the browser back/forward
 const handlePagination = (page) => {
-    window.history.pushState({
-        projectsHtml: document.getElementById('Projects').innerHTML, 
-        paginationHtml: document.getElementById('Pagination').innerHTML,
-        headlineHtml: document.getElementById('Headline').innerHTML, 
-        tooltipsHtml: document.getElementById('Tooltips').innerHTML, 
-        page: page
-    }, 'Title', '');
+
+    pushState();
     window.onpopstate = function(e){
         if (e.state && page > e.state.page) {
             page--;
@@ -32,31 +27,39 @@ const handlePagination = (page) => {
     $('#Pagination').on('click', '.grey-gold-button', {}, function() {
         const target = $(this).text();
         (target === 'Next >') ? page++ : page--;
-        $.ajax({
-            type: 'GET',
-            url: `/ajax/projects/${page}`,
-            success: function(data) {
-                const {projects, currentPage, totalPages, usersData} = data;
 
-                projects.forEach((project, index) => {
-                    const user = usersData[project.owner_id];
-                    renderProjects(project, user, index);
-                    renderHeadline(project, user, index);
-                    renderTooltips(user, index);
-                    renderPaginationButtons(currentPage, totalPages);
-                })
+        ajaxProjectsPageRequest(page);
+    })
+}
 
-                showTooltipsOnHover();
-            
-                window.history.pushState({
-                    projectsHtml: document.getElementById('Projects').innerHTML, 
-                    paginationHtml: document.getElementById('Pagination').innerHTML,
-                    headlineHtml: document.getElementById('Headline').innerHTML, 
-                    tooltipsHtml: document.getElementById('Tooltips').innerHTML, 
-                    page: data.page
-                }, 'Title', `/projects/${data.page}`);
-            }
-        })
+const pushState = (path = '') => {
+    window.history.pushState({
+        projectsHtml: document.getElementById('Projects').innerHTML, 
+        paginationHtml: document.getElementById('Pagination').innerHTML,
+        headlineHtml: document.getElementById('Headline').innerHTML, 
+        tooltipsHtml: document.getElementById('Tooltips').innerHTML, 
+        page: page
+    }, 'Title', path );
+}
+
+const ajaxProjectsPageRequest = (page) => {
+    $.ajax({
+        type: 'GET',
+        url: `/ajax/projects/${page}`,
+        success: function(data) {
+            const {projects, currentPage, totalPages, usersData} = data;
+
+            projects.forEach((project, index) => {
+                const user = usersData[project.owner_id];
+                renderProjects(project, user, index);
+                renderHeadline(project, user, index);
+                renderTooltips(user, index);
+                renderPaginationButtons(currentPage, totalPages);
+            })
+
+            showTooltipsOnHover();
+            pushState(`/projects/${data.page}`);
+        }
     })
 }
 
@@ -144,22 +147,14 @@ const renderPaginationButtons = (currentPage, totalPages) => {
     $('#Pagination').html(paginationHtml);
 }
 
+/* Would allow us to only request tooltip data once per browsing session */
 
-const handleBrowserHistory = () => {
-
-}
-
-
-// (function setSessionStorage() {
-//     let projects = JSON.parse(sessionStorage.getItem('projects'));
+// const setSessionStorage = () => {
 //     let usersData = JSON.parse(sessionStorage.getItem('usersData'));
-//     if (!projects && !usersData) {
-//         console.log('NO PROJECT OR USERS DATA');
-//         projects = "<%= projects %>";
+//     if (!usersData) {
 //         usersData = "<%= usersData %>";
-//         sessionStorage.setItem('projects', JSON.stringify(projects));
 //         sessionStorage.setItem('usersData', JSON.stringify(usersData));
 //     }
-//     return [JSON.parse(sessionStorage.getItem('projects')), JSON.parse(sessionStorage.getItem('usersData'))];
-// })();
+//     return JSON.parse(sessionStorage.getItem('usersData'))];
+// });
 
