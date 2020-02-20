@@ -1,5 +1,3 @@
-// import { render } from "ejs";
-
 //adds user tooltip hover functionality 
 const showTooltipsOnHover = () => {
     $('.identity-card-container').on('mouseover', '.identity-card', function(){
@@ -12,10 +10,7 @@ const showTooltipsOnHover = () => {
 //Handles pagination, including prev/next buttons and the browser back/forward
 const handlePagination = (page) => {
     window.history.pushState({
-        projectsHtml: document.getElementById('Projects').innerHTML, 
-        paginationHtml: document.getElementById('Pagination').innerHTML,
-        headlineHtml: document.getElementById('Headline').innerHTML, 
-        tooltipsHtml: document.getElementById('Tooltips').innerHTML, 
+        html: document.getElementById('Content').innerHTML,
         page: page
     }, 'Title', '');
     window.onpopstate = function(e){
@@ -24,10 +19,8 @@ const handlePagination = (page) => {
         } else if (e.state && page < e.state.page) {
             page++;
         }
-        document.getElementById('Projects').innerHTML = e.state.projectsHtml;
-        document.getElementById('Pagination').innerHTML = e.state.paginationHtml;
-        document.getElementById('Headline').innerHTML = e.state.headlineHtml;
-        document.getElementById('Tooltips').innerHTML = e.state.tooltipsHtml;
+        document.getElementById('Content').innerHTML = e.state.html;
+
         showTooltipsOnHover();
     };
 
@@ -42,22 +35,20 @@ const handlePagination = (page) => {
 
                 projects.forEach((project, index) => {
                     const user = usersData[project.owner_id];
-                    renderProjects(project, user, index);
-                    renderHeadline(project, user, index);
-                    renderTooltips(user, index);
-                    renderPaginationButtons(currentPage, totalPages);
+                    if (user) {
+                        renderProjects(project, user, index);
+                        renderHeadline(project, user, index);
+                        renderTooltips(user, index);
+                        renderPaginationButtons(currentPage, totalPages);
+                    }
                 })
-
-                showTooltipsOnHover();
-            
                 window.history.pushState({
-                    projectsHtml: document.getElementById('Projects').innerHTML, 
-                    paginationHtml: document.getElementById('Pagination').innerHTML,
-                    headlineHtml: document.getElementById('Headline').innerHTML, 
-                    tooltipsHtml: document.getElementById('Tooltips').innerHTML, 
+                    html: document.getElementById('Content').innerHTML,
                     page: data.page
                 }, 'Title', `/projects/${data.page}`);
             }
+        }).done(function() {
+            showTooltipsOnHover();
         })
     })
 }
@@ -100,7 +91,7 @@ const renderHeadline = (project, user, index) => {
         </h3>
         <p class="identity-card-container">
             <span class="identity-card" data-id="106066">
-                <a href="#"><img src="${user.image_url}" >${user.screen_name}</a>
+                <a href="/project/${project.id}"><img src="${user.image_url}" >${user.screen_name}</a>
             </span>
         </p>
     `)
@@ -142,8 +133,9 @@ const renderPaginationButtons = (currentPage, totalPages) => {
     } else if (currentPage == totalPages && totalPages > 1) {
         paginationHtml = `<button class="grey-gold-button prev-button">< Prev</button>`
     }
-
+    
     $('#Pagination').html(paginationHtml);
+    
 }
 
 

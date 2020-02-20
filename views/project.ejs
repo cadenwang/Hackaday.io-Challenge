@@ -6,18 +6,19 @@
         <title>Project Page</title>
         <meta name="description" content="">
         <script type="text/javascript" src="//use.typekit.net/ymb0lgk.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript">try{Typekit.load({ async: true });}catch(e){}</script>
         <link rel="stylesheet" href="/stylesheets/styles.css">
     </head>
-    <body class="project-view">
+    <body class="project-view" id="Content">
         <div class="container project-holder">
             <div class="row">
                 <div class="col project-item">
                     <div class="headline">
                         <h1><%= project.name %></h1>
-                        <p class="description"><%= project.description %></p>
+                        <p class="description"><%= project.summary %></p>
                         <div class="author">
-                            <span class="identity-card" data-id="106066"><a href="#"><img src=<%= project.url %> >Owner: <%= project.owner_id %></a></span>
+                            <span class="identity-card" data-id="106066"><a href="#"><img src="<%= user.image_url %>" >Owner: <%= user.screen_name %></a></span>
                         </div>
                     </div>
                 </div>
@@ -37,7 +38,7 @@
                         <small>followers</small>
                     </div>
                     <div class="stat-one like_count">
-                        <span title="Likes"><%= project.likes %></span>
+                        <span title="Likes"><%= project.skulls %></span>
                         <small>likes</small>
                     </div>
                 </div>
@@ -52,11 +53,19 @@
                         <p class="description"><%= project.description %>
                         </p>
                     </section>
-                    <a href="/" class="btn btn-primary">Go Back</a>
+                    <button class="btn btn-primary grey-gold-button prev-button go-back">Go Back</button>
                 </div>
             </div>
         </div>
         <!-- Add your site or application content here -->
         <script src="javascripts/index.js"></script>
+        <script>
+            $('.go-back').on('click', function(e) {
+                window.history.pushState({
+                    html: document.getElementById('Content').innerHTML
+                }, 'Title', `${window.location.pathname}`);
+                location.href = document.referrer;
+            })
+        </script>
     </body>
 </html>

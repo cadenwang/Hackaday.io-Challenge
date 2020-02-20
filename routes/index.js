@@ -1,5 +1,5 @@
 const indexRoute = {};
-const {getProjectsData, getUsersByProjectId} = require('../public/javascripts/helpers.js');
+const {getProjectsData, getUsersByProjectId} = require('../public/javascripts/apiCalls.js');
 
 indexRoute.get = async function (req, res, next) {
     let page = req.params.page || 1;

@@ -10,7 +10,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/stylesheets/styles.css">  
     </head>
-    <body class="home-view">
+    <body class="home-view" id="Content">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -82,7 +82,7 @@
                                     </h3>
                                     <p class="identity-card-container">
                                         <span class="identity-card" data-id="106066">
-                                            <a href="#"><img src="<%= user.image_url %>" ><%= user.screen_name %></a>
+                                            <a href="/project/<%= project.id %>"><img src="<%= user.image_url %>" ><%= user.screen_name %></a>
                                         </span>
                                     </p>
                                 </div>

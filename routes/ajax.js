@@ -1,8 +1,7 @@
 const ajaxRoute = {};
 const axios = require('axios');
 const apiKey = require('../config.js').hackaday.apiKey;
-const {getProjectsData, getUsersByProjectId} = require('../public/javascripts/helpers.js');
-
+const {getProjectsData, getUsersByProjectId} = require('../public/javascripts/apiCalls.js');
 
 
 ajaxRoute.projects = async function (req, res, next) {
